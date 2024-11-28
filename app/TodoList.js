@@ -1,8 +1,9 @@
 import { revalidateTag } from "next/cache";
 import React from "react";
+import { getBaseUrl } from "./config";
 
 async function TodoList(props) {
-  const data = await fetch("http://localhost:3000/api/todos", {
+  const data = await fetch(getBaseUrl() + "/api/todos", {
     next: { tags: ["todos"] },
     cache: "no-store",
   });
@@ -31,7 +32,7 @@ async function TodoList(props) {
     "use server";
 
     const text = formData.get("text");
-    fetch("http://localhost:3000/api/todos", {
+    fetch(getBaseUrl() + "/api/todos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
